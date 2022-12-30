@@ -4,7 +4,7 @@ window.onload = function() {
     createPokemons()     
 }
 
-
+// Getting pokemon by ID
 function getPokemon (id){
     let url = `https://pokeapi.co/api/v2/pokemon/${id}`
 
@@ -18,12 +18,15 @@ function getPokemon (id){
     })
 }
 
+// Generating Pokemons according to argument "number"
 function getPokemons (number){
     for (let i = 1; i <= number; i++){
         getPokemon(i)
 }
 }
 
+
+// Displaying Pokemons and manipulating the DOM 
 function createPokemons (pokemon){
     let pokemonType = pokemon.types.map((type) => {return type.type.name})
     let pokemonAbilities = pokemon.abilities.map((ability) => {return ability.ability.name})
