@@ -1,13 +1,12 @@
-window.onload = function () {
-
+const init = () => {
 getRandomPokemons();
 getPokemonData()
 
 }
 
-
-
 const board = document.querySelector(".board");
+const btnRestart = document.querySelector(".restart")
+
 
 // generating and fetching 8 random Pokemons from the 151 originals
 
@@ -40,14 +39,12 @@ const getPokemonData = async () => {
     printPokemons(pokemon);
   };
 
-
-  // printing pokemons and manipulating the DOM 
-
+ 
 const printPokemons = (pokemon) => {
   
   // duplicating the 8 random pokemons
 
-  const pokemonCardsArray = [...pokemon, ...pokemon];
+  pokemonCardsArray = [...pokemon, ...pokemon];
   
   // randomize "pokemonCardsArray". Generate random order for the pokemon cards
 
@@ -82,7 +79,7 @@ const printPokemons = (pokemon) => {
    
 
     cardContainer.addEventListener("click", (event) => {
-      cardContainer.classList.add("toggleCard");
+    cardContainer.classList.add("toggleCard");
       checkCards(event);
     });
   });
@@ -117,17 +114,21 @@ const checkCards = (event) => {
     }
   }
   restartGame()
+
 };
 
 
 // function to restart the game 
 
 const restartGame = () => {
-const btnRestart = document.querySelector(".restart")
-const toggledCards = document.querySelector(".toggleCard")
+const toggledCards = document.querySelectorAll(".toggleCard")
 console.log(toggledCards)
-btnRestart.addEventListener("click", () =>{
-toggledCards.classList.remove("toggleCard")
-})
+btnRestart.addEventListener("click", (event) =>{
+  // toggledCards.forEach (element =>{
+  // element.classList.remove("toggleCard")
+  location.reload()
+  })
 }
 
+console.log(restartGame())
+window.onload = init()
