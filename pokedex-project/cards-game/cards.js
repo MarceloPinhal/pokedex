@@ -1,11 +1,13 @@
-const init = () => {
+window.onload = () => {
 getRandomPokemons();
-getPokemonData()
-
 }
+
+
+
 
 const board = document.querySelector(".board");
 const btnRestart = document.querySelector(".restart")
+
 
 
 // generating and fetching 8 random Pokemons from the 151 originals
@@ -28,16 +30,8 @@ const getRandomPokemons = async () => {
       return res.json();
     })
   );
-
-  return pokemon;
+  printPokemons(pokemon)
 };
-
-
-// asign data from the API to a non asynchronous variable 
-const getPokemonData = async () => {
-    const pokemon = await getRandomPokemons();
-    printPokemons(pokemon);
-  };
 
  
 const printPokemons = (pokemon) => {
@@ -76,7 +70,6 @@ const printPokemons = (pokemon) => {
     cardContainer.appendChild(backContainer);
     faceContainer.appendChild(imgContainer);
     imgContainer.appendChild(pokemonImg);
-   
 
     cardContainer.addEventListener("click", (event) => {
     cardContainer.classList.add("toggleCard");
@@ -121,14 +114,17 @@ const checkCards = (event) => {
 // function to restart the game 
 
 const restartGame = () => {
+
 const toggledCards = document.querySelectorAll(".toggleCard")
-console.log(toggledCards)
-btnRestart.addEventListener("click", (event) =>{
-  // toggledCards.forEach (element =>{
-  // element.classList.remove("toggleCard")
-  location.reload()
+const cardContainer = document.querySelector(".card");
+
+btnRestart.addEventListener("click", () =>{
+  toggledCards.forEach (element =>{
+  element.classList.remove("toggleCard")
   })
+})
 }
 
-console.log(restartGame())
-window.onload = init()
+// problem: in order to remove all the cards and generate new ones when clicking on
+// restart button i need to generate the array of cards outside the 
+// asyn function "getRandomPokemons"
