@@ -1,7 +1,16 @@
 window.onload = function() { 
-    getPokemons(151)
-    getPokemon()
-    createPokemons()     
+    getPokemons(151)    
+}
+
+// Getting pokemon by ID
+
+
+
+// Generating Pokemons according to argument "number"
+function getPokemons (number){
+    for (let i = 1; i <= number; i++){
+        getPokemon(i)
+}
 }
 
 // Getting pokemon by ID
@@ -14,17 +23,8 @@ function getPokemon (id){
     })
     .then ((pokemonJson) =>{
         createPokemons(pokemonJson)
-
     })
 }
-
-// Generating Pokemons according to argument "number"
-function getPokemons (number){
-    for (let i = 1; i <= number; i++){
-        getPokemon(i)
-}
-}
-
 
 // Displaying Pokemons and manipulating the DOM 
 function createPokemons (pokemon){
@@ -42,7 +42,7 @@ function createPokemons (pokemon){
          <p>Habilities:${pokemonAbilities}</p>
          </div>
          ` 
-
 }
 
-getPokemons(151)
+
+// Problema:why is "getPokemon" function generating pokemons in an random order
