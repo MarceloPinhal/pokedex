@@ -1,26 +1,54 @@
-const hole = document.querySelectorAll(".hole")
-console.log(hole)
-const meowth = document.querySelectorAll(".meowth")
-const score = document.querySelector(".score")
+const holes = document.querySelectorAll(".hole");
+let score = document.querySelector(".score");
 
-let lastHole;
+let hitPosition;
 let isGameFinished = false;
-let count = 0;
+let scoreTotal = 0;
+let randomTime = 0;
 
+function printMole() {
+  if (!isGameFinished) {
+    holes.forEach((hole) => {
+      hole.classList.remove("up");
+    });
 
-const randomTime = () => {
-   return Math.random()
+    let randomHole = holes[Math.floor(Math.random() * 6)];
+
+    randomHole.classList.add("up");
+    hitPosition = randomHole.classList[2];
+  }
 }
 
-console.log(randomTime())
-
-const randomHole = (lastHole) => {
-    lastHole !== randomTime()
+function randomTimer(min, max) {
+  let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+  return (randomTime = randomNumber);
 }
 
-const addClassUp = () => {
-
+function moveMole() {
+  setInterval(printMole, randomTime);
 }
 
+holes.forEach((hole) => {
+  hole.addEventListener("mousedown", () => {
+    if (hole.classList[2] === hitPosition) {
+      scoreTotal++;
+      score.textContent = scoreTotal;
+    }
+  });
+});
 
+function startGame() {
+  score.textContent = 0;
+  scoreTotal = 0;
+  randomTimer(500, 800);
+  moveMole();
+  setTimeout(() => {
+    holes.forEach((hole) => {
+      hole.classList.remove("up");
+    });
+    document.location.reload();
+    return (isGameFinished = true);
+  }, 15000);
+}
 
+// problem: what to do when the random number generate is equal.
