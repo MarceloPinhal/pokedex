@@ -1,14 +1,9 @@
 window.onload = () => {
-getRandomPokemons();
-}
-
-
-
+  getRandomPokemons();
+};
 
 const board = document.querySelector(".board");
-const btnRestart = document.querySelector(".restart")
-
-
+const btnRestart = document.querySelector(".restart");
 
 // generating and fetching 8 random Pokemons from the 151 originals
 
@@ -30,16 +25,14 @@ const getRandomPokemons = async () => {
       return res.json();
     })
   );
-  printPokemons(pokemon)
+  printPokemons(pokemon);
 };
 
- 
 const printPokemons = (pokemon) => {
-  
   // duplicating the 8 random pokemons
 
   pokemonCardsArray = [...pokemon, ...pokemon];
-  
+
   // randomize "pokemonCardsArray". Generate random order for the pokemon cards
 
   pokemonCardsArray.sort(() => {
@@ -54,7 +47,6 @@ const printPokemons = (pokemon) => {
     const imgContainer = document.createElement("div");
     const pokemonImg = document.createElement("img");
     const backContainer = document.createElement("div");
-   
 
     cardContainer.classList.add("card");
     faceContainer.classList.add("face");
@@ -63,7 +55,6 @@ const printPokemons = (pokemon) => {
 
     pokemonImg.src = pokemon["sprites"]["front_default"];
     cardContainer.setAttribute("name", pokemon.name);
-    
 
     board.appendChild(cardContainer);
     cardContainer.appendChild(faceContainer);
@@ -72,59 +63,71 @@ const printPokemons = (pokemon) => {
     imgContainer.appendChild(pokemonImg);
 
     cardContainer.addEventListener("click", (event) => {
-    cardContainer.classList.add("toggleCard");
-      checkCards(event);
+      cardContainer.classList.add("toggleCard");
+      clickedCards(event);
     });
   });
 };
 
-
 // get control of  clicked cards
 
-const checkCards = (event) => {
+const clickedCards = (event) => {
   const clickedCard = event.target;
+
   clickedCard.classList.add("flipped");
   const flippedCards = document.querySelectorAll(".flipped");
-  
+  const notFlippedCards = document.querySelectorAll(".card:not(.flipped)");
+ 
 
   //   Logic for flipping cards
 
   if (flippedCards.length === 2) {
+    
+    
+// the player of the game needs to wait 1sec to click on the next cards
+    notFlippedCards.forEach((card) => {
+      card.style.pointerEvents = "none";
+    });
+
     if (
       flippedCards[0].getAttribute("name") ===
       flippedCards[1].getAttribute("name")
     ) {
-        flippedCards.forEach( card =>{
-            card.classList.remove("flipped");
-            card.style.pointerEvents = "none";
-        })
+      flippedCards.forEach((card) => {
+        card.classList.remove("flipped");
+        card.style.pointerEvents = "none";
+      });
+
+        notFlippedCards.forEach((card) => {
+        setTimeout(()=>{
+        card.removeAttribute("style")},1000)})
+      
 
     } else {
-        flippedCards.forEach( card =>{
-        card.classList.remove("flipped")
-        setTimeout(() => {return card.classList.remove("toggleCard")},1000)
-    })
+      flippedCards.forEach((card) => {
+        card.classList.remove("flipped");
+        setTimeout(() => {
+          return card.classList.remove("toggleCard");
+        }, 1000)});
+
+      notFlippedCards.forEach((card) => {
+      setTimeout(()=>{
+      card.removeAttribute("style")},1000)})
     }
-  }
-  restartGame()
-
-};
-
-
-// function to restart the game 
-
-const restartGame = () => {
-
-const toggledCards = document.querySelectorAll(".toggleCard")
-const cardContainer = document.querySelector(".card");
-
-btnRestart.addEventListener("click", () =>{
-  toggledCards.forEach (element =>{
-  element.classList.remove("toggleCard")
-  })
-})
+}
+restartGame();
 }
 
-// problem: in order to remove all the cards and generate new ones when clicking on
-// restart button i need to generate the array of cards outside the 
-// asyn function "getRandomPokemons"
+// function to restart the game
+
+const restartGame = () => {
+  const toggledCards = document.querySelectorAll(".toggleCard");
+
+  btnRestart.addEventListener("click", () => {
+    toggledCards.forEach((card) => {
+      card.classList.remove("toggleCard");
+      card.removeAttribute("style");
+    });
+  });
+}
+
