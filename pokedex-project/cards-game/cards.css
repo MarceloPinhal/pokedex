@@ -7,6 +7,12 @@
 body {
     width: 100%;
     height: 100vh;
+    background-image: url("https://i0.wp.com/culturageek.com.ar/wp-content/uploads/2022/12/tcg-how-to-play-169-es.jpg?resize=350%2C200&ssl=1");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+
 
 }
 
@@ -33,9 +39,9 @@ body {
     height: 100%;
 }
 .img__container img {
-width: 100%;
-height: 100%;
-object-fit:scale-down;
+  width: 100%;
+  height: 100%;
+  object-fit:scale-down;
 }
 
 .back,
@@ -59,4 +65,39 @@ object-fit:scale-down;
 
 .toggleCard {
     transform:rotateY(180deg);
+}
+
+
+.pokematch__img{
+    padding-left: 38%;
+    height: 100px;
+    margin-left: 61px;
+}
+
+.button {
+    align-items: center;
+    padding-left: 40%;
+}
+.button__style{
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+     border-radius: 28px;
+     text-shadow: 3px 2px 1px #9daef5;
+     -webkit-box-shadow: 6px 5px 24px #666666;
+     -moz-box-shadow: 6px 5px 24px #666666;
+    box-shadow: 6px 5px 24px #666666;
+    font-family: Arial;
+    color: #fafafa;
+    font-size: 27px;
+    padding: 19px;
+    text-decoration: none;
+    cursor:pointer; cursor: hand;
+
+    background: #2079b0;
+    background-image: -webkit-linear-gradient(top, #2079b0, #eb94d0);
+    background-image: -moz-linear-gradient(top, #2079b0, #eb94d0);
+    background-image: -ms-linear-gradient(top, #2079b0, #eb94d0);
+    background-image: -o-linear-gradient(top, #2079b0, #eb94d0);
+    background-image: linear-gradient(to bottom, #2079b0, #eb94d0);
+    text-decoration: none;
 }
