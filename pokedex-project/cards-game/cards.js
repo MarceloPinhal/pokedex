@@ -4,6 +4,7 @@ window.onload = () => {
 
 const board = document.querySelector(".board");
 const btnRestart = document.querySelector(".restart");
+let pokemonArray = []
 
 // generating and fetching 8 random Pokemons from the 151 originals
 
@@ -15,23 +16,19 @@ const getRandomPokemons = async () => {
     randomIdsArray.push(randomNumber);
   }
 
-  const pokePromises = randomIdsArray.map((id) => {
-    return fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-  });
+  for (randomId of randomIdsArray){
+    
+    const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
+    const pokemonData = await resp.json()
+    pokemonArray.push(pokemonData)
+  }
+  printPokemons(pokemonArray)
+  }
 
-  const responses = await Promise.all(pokePromises);
-  const pokemon = await Promise.all(
-    responses.map((res) => {
-      return res.json();
-    })
-  );
-  printPokemons(pokemon);
-};
-
-const printPokemons = (pokemon) => {
+const printPokemons = (pokemonArray) => {
   // duplicating the 8 random pokemons
 
-  pokemonCardsArray = [...pokemon, ...pokemon];
+  let pokemonCardsArray = [...pokemonArray, ...pokemonArray];
 
   // randomize "pokemonCardsArray". Generate random order for the pokemon cards
 

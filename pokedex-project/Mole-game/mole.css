@@ -10,6 +10,7 @@ body {
   padding: 0;
   margin: 0;
   text-align: center;
+  font-family:  'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
 }
 
@@ -19,13 +20,6 @@ h1 {
   line-height: 1;
   margin-bottom: 0;
   color: #ffcb05;
-  text-shadow:
--2px 0px 0px #2a75bb,
-2px 0px 0px #2a75bb,
-0px -2px 0px #2a75bb,
-0px 2px 0px #2a75bb;
-letter-spacing: 5px;
-font-family: "Pokemon Solid", sans-serif;
 }
 
 .score {
@@ -52,6 +46,7 @@ font-family: "Pokemon Solid", sans-serif;
   flex: 1 0 33.33%;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
 }
 
 .hole:after {
@@ -90,6 +85,7 @@ button {
   margin-left: 20px;
   margin-top: 90px;
   border: 2px solid black;
+  cursor: pointer;
 }
 
 .single__image {

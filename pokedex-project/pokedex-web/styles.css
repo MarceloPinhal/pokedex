@@ -87,7 +87,7 @@ a:visited{
   cursor: pointer;
   text-transform: uppercase;
   border-radius: 15px;
-  box-shadow: 0 0 1.5rem;
+  box-shadow: 0 0 0.2rem;
   font-weight: bold;
   transition: 0.2s;
 }
