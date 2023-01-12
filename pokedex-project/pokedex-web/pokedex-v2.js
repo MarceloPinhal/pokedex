@@ -11,7 +11,7 @@ let pokemonDescriptions = [];
 // Getting pokemon by ID
 
 const fetchPokemon = async () => {
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 151; i++) {
 
     const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
     const pokemonData = await resp.json();
@@ -67,7 +67,7 @@ const printPokemon = (pokemonArray) => {
         <div class="card-bottom">
         <p class="pokemon-description">
         </p>
-        <p>#${pokemon.id}</p>
+        <p class="id">#${pokemon.id}</p>
         </div>
         </div>
          `;
@@ -84,7 +84,7 @@ let pokemonDescriptionsHTML = document.querySelectorAll(".pokemon-description")
 
 for (let i = 0; i < pokemonDescriptions.length; i++){
   
- let description = pokemonDescriptions[i]["flavor_text_entries"][0]["flavor_text"]
+ let description = pokemonDescriptions[i]["flavor_text_entries"][9]["flavor_text"]
 
 if (pokemonDescriptionsHTML[i]){
 
@@ -126,7 +126,7 @@ const printButtons = () => {
   noDuplicates.forEach((type) => {
     const button = document.createElement("button");
     buttonsDiv.appendChild(button);
-    button.classList.add(type);
+    button.classList.add(`button-${type}`);
     button.innerText = type;
     buttonsDiv.appendChild(button);
     button.addEventListener("click", () => filteredPokemon(type));

@@ -15,7 +15,6 @@ function printMole() {
     let randomHole = holes[Math.floor(Math.random() * 6)];
     randomHole.classList.add("up");
     hitPosition = randomHole.classList[2];
-    console.log(hitPosition)
 
   }
 }

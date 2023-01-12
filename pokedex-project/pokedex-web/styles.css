@@ -1,8 +1,12 @@
 @import url("https://fonts.cdnfonts.com/css/pokemon-solid");
 
+*{
+  margin: 0
+}
+
 body {
   margin: 0%;
-  background: #f4dc98;
+  background: #003A70;
  
 }
 
@@ -33,10 +37,104 @@ body {
   height: 141px;
 }
 
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
 
+}
 .buttons button {
   margin-right: 10px;
+  padding: 0.5rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 15px;
+  box-shadow: 0 0 1.5rem;
+  font-weight: bold;
+  transition: 0.2s;
 }
+
+.buttons button:hover {
+transform: scale(1.1);
+box-shadow: 0 0 2rem;
+}
+
+.button-normal {
+  background-color: #A8A77A;
+}
+
+.button-grass {
+  background-color: #7AC74C;
+}
+
+.button-fire {
+  background-color:  #EE8130;
+}
+
+.button-water {
+  background-color:  #6390F0;
+}
+
+.button-electric {
+  background-color:  #F7D02C;
+}
+
+.button-ice {
+  background-color:  #96D9D6;
+}
+
+.button-figthing {
+  background-color: #C22E28
+}
+
+.button-poison {
+  background-color: #A33EA1
+}
+
+.button-ground {
+  background-color: #E2BF65
+}
+
+.button-flying {
+  background-color: #A98FF3
+}
+
+.button-psychic {
+  background-color: #F95587
+}
+
+.button-bug {
+  background-color: #A6B91A
+}
+
+.button-rock {
+  background-color: #B6A136
+}
+
+.button-ghost {
+  background-color: #735797
+}
+
+.button-dragon {
+  background-color: #6F35FC
+}
+
+.button-dark {
+  background-color: #705746
+}
+
+.button-steel {
+  background-color: #B7B7CE
+}
+
+.button-fairy {
+  background-color: #D685AD;
+}
+
+.search-bar__container {
+  margin-top: 20px;
+}
+
 .games {
   display: flex;
   align-items: center;
@@ -71,6 +169,7 @@ body {
 }
 
 .root {
+  padding: 3rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   grid-gap: 20px;
@@ -78,46 +177,109 @@ body {
 }
 
 .pokemon-container {
-  width: 315px;
-  height: auto;
+  width: 250px;
+  min-height: 380px;
   border: 10px solid gold;
   border-radius: 20px;
   padding: 5px;
   ;
 }
 
-.pokemon-container.grass {
-  background: linear-gradient(to bottom right, #aae5b7, #78cf8b, #4fb665, #319d49, #4fb665, #78cf8b);
+.pokemon-container.normal {
+  background-color: #A8A77A;
 }
 
-.pokemon-container.blue {
-  background: linear-gradient(to bottom right, #d9e4ec, #adc1d1, #7d99af, #557792, #7d99af, #adc1d1);
+.pokemon-container.grass {
+  background-color: #7AC74C;
 }
 
 .pokemon-container.fire {
-  background: linear-gradient(to bottom right, #ffbfba, #ff978f, #ff756b, #ff594c, #ff756b, #ff978f);
+  background-color:  #EE8130;
+}
+
+.pokemon-container.water {
+  background-color:  #6390F0;
 }
 
 .pokemon-container.electric {
-  background: linear-gradient(to bottom right, #ffffa4, #fff870, #fff200, #fff870, #ffffa4, #fff870);
+  background-color:  #F7D02C;
 }
+
+.pokemon-container.ice {
+  background-color:  #96D9D6;
+}
+
+.pokemon-container.figthing {
+  background-color: #C22E28
+}
+
+.pokemon-container.poison {
+  background-color: #A33EA1
+}
+
+.pokemon-container.ground {
+  background-color: #E2BF65
+}
+
+.pokemon-container.flying {
+  background-color: #A98FF3
+}
+
+.pokemon-container.psychic {
+  background-color: #F95587
+}
+
+.pokemon-container.bug {
+  background-color: #A6B91A
+}
+
+.pokemon-container.rock {
+  background-color: #B6A136
+}
+
+.pokemon-container.ghost {
+  background-color: #735797
+}
+
+.pokemon-container.dragon {
+  background-color: #6F35FC
+}
+
+.pokemon-container.dark {
+  background-color: #705746
+}
+
+.pokemon-container.steel {
+  background-color: #B7B7CE
+}
+
+.button-fairy {
+  background-color: #D685AD;
+}
+
 
 .card-header {
   display: flex;
-    justify-content: space-between;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-weight: bolder;
 }
 
+.pokemon-name {
+  text-transform: capitalize;
+}
 .pokemon-hp {
   color:crimson;
+  font-weight: bold;
 }
 
 .card-content{
-  padding: 10px;
+  padding-left: 10px;
   background: linear-gradient(to bottom rigth, pink, purple);
 
 }
 .image__container {
-    width: 300px;
+    width: 235px;
     height: 200px;
 
 }
@@ -131,4 +293,27 @@ body {
 
 .pokemon-skills {
   margin-top: 30px;
+}
+
+.pokemon-attack {
+  display: flex;
+  justify-content: space-around;
+}
+
+.pokemon-defense{
+  display: flex;
+  justify-content: space-around;
+}
+
+.card-bottom {
+  margin-top:10px;
+}
+
+.pokemon-description {
+height: 72px;
+}
+.card-bottom .id{
+  font-size: 14px;
+  color: rgb(245, 200, 200);
+  margin-top: 5px;
 }
