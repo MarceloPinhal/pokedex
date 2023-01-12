@@ -13,11 +13,13 @@ function printMole() {
     });
 
     let randomHole = holes[Math.floor(Math.random() * 6)];
-
     randomHole.classList.add("up");
     hitPosition = randomHole.classList[2];
+    console.log(hitPosition)
+
   }
 }
+
 
 function randomTimer(min, max) {
   let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -28,6 +30,9 @@ function moveMole() {
   setInterval(printMole, randomTime);
 }
 
+
+const addEventListener = () =>{
+
 holes.forEach((hole) => {
   hole.addEventListener("mousedown", () => {
     if (hole.classList[2] === hitPosition) {
@@ -35,13 +40,17 @@ holes.forEach((hole) => {
       score.textContent = scoreTotal;
     }
   });
-});
+})
+}
+
+
 
 function startGame() {
   score.textContent = 0;
   scoreTotal = 0;
-  randomTimer(500, 800);
+  randomTimer(500, 600);
   moveMole();
+  addEventListener()
   setTimeout(() => {
     holes.forEach((hole) => {
       hole.classList.remove("up");
@@ -51,4 +60,4 @@ function startGame() {
   }, 15000);
 }
 
-// problem: what to do when the random number generate is equal.
+// problem: what to do when the random number generated is equal?

@@ -14,65 +14,39 @@
     
   </head>
   <body>
-    <header class="nav">
-      <div class="pokedex-games">
+    <header>
+
+      <div class="nav-container">
+      <div class="pokedex-container">
         <div class="pokedex">
           <img
             src="https://user-images.githubusercontent.com/29473781/180619084-a56960ab-7efa-4e34-9d33-4e3e581d62ff.png"
             alt="pokedex image"
           />
         </div>
-        <div class="games">
-          <div class="games-container">
-            <a class="Mole" href="../cards-game/cards.html" target="_blank">
-              <img class ="card-game-img"
-                src="./assets/back-card.png"
-                alt="poke-card"
-              />
-            </a>
-          </div>
-          <h3>👈 Poke-Playground 👉</h3>
-          <div class="games-container">
-          <a class="Mole" href="../Mole-game/mole.html" target="_blank">
-            <img class = "hammer-game-img"
-              src="./assets/meowth.jpg"
-              alt="poke-card"
-            />
-          </a>
+        <div class="search-bar__container">
+        <input class ="search-bar" type="text" placeholder="search pokemon"> 
         </div>
+        <div class="buttons">
         </div>
       </div>
-
-      <ul class="nav-list">
-        <li class="nav-item">
-          <button class="btn" onclick="seeAllPokemon()">
-            gotta catch em all
-          </button>
+        <div class="games">
+          <div class="games-tittle">
+          <h3>Poké-Playground: </h3>
+        </div>
+          <div class="games-container">
+            <ul class ="games-list">
+            <li></li>
+            <a class="game" href="../cards-game/cards.html" target="_blank">
+              Poké-cards!
+            </a>
+          </li>
+          <li>
+            <a class="game" href="../Mole-game/mole.html" target="_blank">
+           Whack-a-Meowth!
+          </a>
         </li>
-        <li class="nav-item">
-          <button class="btn" onclick="clearAllPokemon()">
-            clear all Pokemon
-          </button>
-        </li>
-
-        <!-- <li class="nav-item"><button class="btn" id="normal">Normal</button></li>
-            <li class="nav-item"><button class="btn" id="fire">Fire</button></li>
-            <li class="nav-item"><button class="btn" id="water">Water</button></li>
-            <li class="nav-item"><button class="btn" id="grass">Grass</button></li>
-            <li class="nav-item"><button class="btn" id="electric">Electric</button></li>
-            <li class="nav-item"><button class="btn" id="ice">Ice</button></li>
-            <li class="nav-item"><button class="btn" id="figthing">Figthing</button></li>
-            <li class="nav-item"><button class="btn" id="poison">Poison</button></li>
-            <li class="nav-item"><button class="btn" id="ground">Ground</button></li>
-            <li class="nav-item"><button class="btn" id="flying">Flying</button></li>
-            <li class="nav-item"><button class="btn" id="bug">Bug</button></li>
-            <li class="nav-item"><button class="btn" id="rock">Rock</button></li>
-            <li class="nav-item"><button class="btn" id="ghost">Ghost</button></li>
-            <li class="nav-item"><button class="btn" id="dark">Dark</button></li>
-            <li class="nav-item"><button class="btn" id="dragon">Dragon</button></li>
-            <li class="nav-item"><button class="btn" id="steel">Steel</button></li>
-            <li class="nav-item"><button class="btn" id="fairy">Fairy</button></li> -->
-      </ul>
+        </ul>
     </header>
     <div class="root"></div>
   </body>

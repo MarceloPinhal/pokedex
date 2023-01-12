@@ -1,61 +1,164 @@
-window.onload = function () {
-  getPokemons(5);
-};
-
 const root = document.querySelector(".root");
-const allBtn = document.getElementById("see-all");
+const buttonsDiv = document.querySelector(".buttons");
+const searchBar = document.querySelector(".search-bar")
 
 
 
+let pokemonArray = [];
+let pokemonDescriptions = [];
 
-
-// Generating Pokemons according to argument "number"
-function getPokemons(number) {
-  for (let i = 1; i <= number; i++) {
-    getPokemon(i);
-  }
-}
 
 // Getting pokemon by ID
-function getPokemon(id) {
-  let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
 
-  fetch(url)
-    .then((response) => {
-      return response.json();
-    })
-    .then((pokemonJson) => {
-      createPokemons(pokemonJson);
-    });
-}
+const fetchPokemon = async () => {
+  for (let i = 1; i <= 5; i++) {
+
+    const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
+    const pokemonData = await resp.json();
+    pokemonArray.push(pokemonData);
+
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${i}`);
+    const descriptionsData = await response.json();
+    pokemonDescriptions.push(descriptionsData);
+  }
+
+  filteredPokemon();
+  printButtons();
+};
+
+
 
 // Displaying Pokemons and manipulating the DOM
-function createPokemons(pokemon) {
-
-  let pokemonType = pokemon.types.map((type) => {
-    return `<span class=${type.type.name}>${type.type.name}</span>`}).join("")
+const printPokemon = (pokemonArray) => {
  
-console.log(pokemonType)
+  root.innerHTML = "";
+  
 
-  root.innerHTML += `
-        <div class = "pokemon__container">
-         <h2>${pokemon.name}</h2>
-         <span>Nº ${pokemon.id}</span>
-         <div class="image__container">
-         <img src="${pokemon.sprites.other["official-artwork"]["front_default"]}" alt= "pokemon-image">
-         </div> 
-         <div class="pokemon-types">
-         ${pokemonType}
-         </div>
-         </div>
-         `;      
+  for (const pokemon of pokemonArray) {
+    let pokemonType = pokemon.types
+      .map((type) => {
+        return type.type.name;
+      })
+
+      
+    root.innerHTML += `
+        <div class = "pokemon-container ${pokemonType[0]}">
+        <div class="card-header">
+        <span class="pokemon-name">
+        ${pokemon.name}
+        </span>
+        <span class="pokemon-hp">
+        HP ${pokemon.stats[0]["base_stat"]}
+        </span>
+        </div>
+        <div class="image__container">
+        <img src="${pokemon.sprites.other["official-artwork"]["front_default"]}" alt= "pokemon-image">
+        </div>
+        <div class="card-content">
+        <div class="pokemon-skills">
+        <div class="pokemon-attack">
+        <span>Attack:</span>
+        <span> ${pokemon.stats[1]["base_stat"]}</span>
+        </div>
+        <div class="pokemon-defense">
+        <span>Defense:</span>
+        <span>${pokemon.stats[2]["base_stat"]}</span>
+        </div>
+        <div class="card-bottom">
+        <p class="pokemon-description">
+        </p>
+        <p>#${pokemon.id}</p>
+        </div>
+        </div>
+         `;
+
+    }
+  
+  printDescriptions(pokemonDescriptions)
+
 }
-// Problema:why is "getPokemon" function generating pokemons in an random order
-// function seeAllPokemon(){
-//    getPokemons(5)
-//    root.innerHTML="";
-// }
 
-// function clearAllPokemon () {
-//     root.innerHTML=""
-// }
+const printDescriptions = (pokemonDescriptions) => {
+
+let pokemonDescriptionsHTML = document.querySelectorAll(".pokemon-description")
+
+for (let i = 0; i < pokemonDescriptions.length; i++){
+  
+ let description = pokemonDescriptions[i]["flavor_text_entries"][0]["flavor_text"]
+
+if (pokemonDescriptionsHTML[i]){
+
+pokemonDescriptionsHTML[i].textContent = description
+}
+}
+}
+
+
+
+
+const printButtons = () => {
+  let pokemonTypesArray = [];
+  let noDuplicates = [];
+
+  // pushing all the pokemon types into an array
+  pokemonArray.forEach((pokemon) => {
+    pokemon.types.forEach((type) => {
+      pokemonTypesArray.push(type.type.name);
+    });
+  });
+
+  // removing duplicate values from the initial types array
+
+  pokemonTypesArray.map((type) =>
+    !noDuplicates.includes(type) ? noDuplicates.push(type) : false
+  );
+
+  // creating button to see all Pokemon
+  const button = document.createElement("button");
+  buttonsDiv.appendChild(button);
+  button.classList.add("see-all");
+  button.innerText = "see-all";
+  buttonsDiv.appendChild(button);
+  button.addEventListener("click", () => printPokemon(pokemonArray));
+
+  // creating buttons according to type
+
+  noDuplicates.forEach((type) => {
+    const button = document.createElement("button");
+    buttonsDiv.appendChild(button);
+    button.classList.add(type);
+    button.innerText = type;
+    buttonsDiv.appendChild(button);
+    button.addEventListener("click", () => filteredPokemon(type));
+  });
+};
+
+// creeating filters
+
+const filteredPokemon = (type) => {
+  const filteredPokemon = pokemonArray.filter((pokemon) => {
+    for (const typePokemon of pokemon.types) {
+      if (typePokemon.type.name === type) 
+      return pokemon;
+    }
+  });
+
+  printPokemon(filteredPokemon);
+};
+
+// searchPokemon -> fix it. The function is printing all the pokemonArray
+
+
+const searchPokemon = () => {
+  console.log(searchBar.value)
+  const filteredPokemon = pokemonArray.filter((pokemon) => {
+    if (pokemon.name === searchBar.value.toLowerCase()){
+    return pokemon
+  }
+    })      
+printPokemon(filteredPokemon)
+}
+
+searchBar.addEventListener("input", searchPokemon)
+fetchPokemon();
+
