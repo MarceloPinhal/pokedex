@@ -137,19 +137,19 @@ const filteredPokemon = (type) => {
 
 // searchPokemon -> fix it. The function is printing all the pokemonArray
 
+searchBar.addEventListener("input", () => searchPokemon() )
 
 const searchPokemon = () => {
  
   const filteredPokemon = pokemonFinalArray.filter((pokemon) => {
-    if (pokemon.pokemon.name === searchBar.value.toLowerCase()){
+    if (pokemon.pokemon.name.includes(searchBar.value.toLowerCase())){
     return pokemon
-  }
-    })      
+  }     
+  })
+
 printPokemon(filteredPokemon)
-searchBar.innerHTML = "";
 }
 
 
-searchBar.addEventListener("input", searchPokemon)
 
 fetchPokemon();
