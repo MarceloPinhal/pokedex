@@ -6,7 +6,7 @@ const searchBar = document.querySelector(".search-bar")
 
 let pokemonArray = [];
 let pokemonDescriptions = [];
-
+let pokemonFinalArray = [];
 
 // Getting pokemon by ID
 
@@ -22,20 +22,27 @@ const fetchPokemon = async () => {
     pokemonDescriptions.push(descriptionsData);
   }
 
-  filteredPokemon();
-  printButtons();
-};
-
-
+      pokemonFinalArray = pokemonArray.map((pokemon,index) => {
+        let description = pokemonDescriptions[index]["flavor_text_entries"][9]
+       
+          return {pokemon, description}
+        })
+        printButtons();
+        filteredPokemon()
+        }
+  
+   
+  // filteredPokemon();
+  
 
 // Displaying Pokemons and manipulating the DOM
-const printPokemon = (pokemonArray) => {
+const printPokemon = (pokemonFinalArray) => {
  
   root.innerHTML = "";
   
 
-  for (const pokemon of pokemonArray) {
-    let pokemonType = pokemon.types
+  for (const pokemon of pokemonFinalArray) {
+    let pokemonType = pokemon.pokemon.types
       .map((type) => {
         return type.type.name;
       })
@@ -45,55 +52,37 @@ const printPokemon = (pokemonArray) => {
         <div class = "pokemon-container ${pokemonType[0]}">
         <div class="card-header">
         <span class="pokemon-name">
-        ${pokemon.name}
+        ${pokemon.pokemon.name}
         </span>
         <span class="pokemon-hp">
-        HP ${pokemon.stats[0]["base_stat"]}
+        HP ${pokemon.pokemon.stats[0]["base_stat"]}
         </span>
         </div>
         <div class="image__container">
-        <img src="${pokemon.sprites.other["official-artwork"]["front_default"]}" alt= "pokemon-image">
+        <img src="${pokemon.pokemon.sprites.other["official-artwork"]["front_default"]}" alt= "pokemon-image">
         </div>
         <div class="card-content">
         <div class="pokemon-skills">
         <div class="pokemon-attack">
         <span>Attack:</span>
-        <span> ${pokemon.stats[1]["base_stat"]}</span>
+        <span> ${pokemon.pokemon.stats[1]["base_stat"]}</span>
         </div>
         <div class="pokemon-defense">
         <span>Defense:</span>
-        <span>${pokemon.stats[2]["base_stat"]}</span>
+        <span>${pokemon.pokemon.stats[2]["base_stat"]}</span>
         </div>
         <div class="card-bottom">
         <p class="pokemon-description">
+        ${pokemon.description["flavor_text"]}
         </p>
-        <p class="id">#${pokemon.id}</p>
+        <p class="id">#${pokemon.pokemon.id}</p>
         </div>
         </div>
          `;
 
     }
-  
-  printDescriptions(pokemonDescriptions)
-
+    
 }
-
-const printDescriptions = (pokemonDescriptions) => {
-
-let pokemonDescriptionsHTML = document.querySelectorAll(".pokemon-description")
-
-for (let i = 0; i < pokemonDescriptions.length; i++){
-  
- let description = pokemonDescriptions[i]["flavor_text_entries"][9]["flavor_text"]
-
-if (pokemonDescriptionsHTML[i]){
-
-pokemonDescriptionsHTML[i].textContent = description
-}
-}
-}
-
-
 
 
 const printButtons = () => {
@@ -101,8 +90,8 @@ const printButtons = () => {
   let noDuplicates = [];
 
   // pushing all the pokemon types into an array
-  pokemonArray.forEach((pokemon) => {
-    pokemon.types.forEach((type) => {
+  pokemonFinalArray.forEach((pokemon) => {
+    pokemon.pokemon.types.forEach((type) => {
       pokemonTypesArray.push(type.type.name);
     });
   });
@@ -119,7 +108,7 @@ const printButtons = () => {
   button.classList.add("see-all");
   button.innerText = "see-all";
   buttonsDiv.appendChild(button);
-  button.addEventListener("click", () => printPokemon(pokemonArray));
+  button.addEventListener("click", () => printPokemon(pokemonFinalArray));
 
   // creating buttons according to type
 
@@ -136,8 +125,8 @@ const printButtons = () => {
 // creeating filters
 
 const filteredPokemon = (type) => {
-  const filteredPokemon = pokemonArray.filter((pokemon) => {
-    for (const typePokemon of pokemon.types) {
+  const filteredPokemon = pokemonFinalArray.filter((pokemon) => {
+    for (const typePokemon of pokemon.pokemon.types) {
       if (typePokemon.type.name === type) 
       return pokemon;
     }
@@ -150,15 +139,17 @@ const filteredPokemon = (type) => {
 
 
 const searchPokemon = () => {
-  console.log(searchBar.value)
-  const filteredPokemon = pokemonArray.filter((pokemon) => {
-    if (pokemon.name === searchBar.value.toLowerCase()){
+ 
+  const filteredPokemon = pokemonFinalArray.filter((pokemon) => {
+    if (pokemon.pokemon.name === searchBar.value.toLowerCase()){
     return pokemon
   }
     })      
 printPokemon(filteredPokemon)
+searchBar.innerHTML = "";
 }
 
-searchBar.addEventListener("input", searchPokemon)
-fetchPokemon();
 
+searchBar.addEventListener("input", searchPokemon)
+
+fetchPokemon();
