@@ -34,12 +34,15 @@ const addEventListener = () =>{
 
 holes.forEach((hole) => {
   hole.addEventListener("mousedown", () => {
-    if (hole.classList[2] === hitPosition) {
+    if (hole.classList[2] === hitPosition && hole.classList.contains("up")) {
       scoreTotal++;
       score.textContent = scoreTotal;
+      hole.classList.remove("up");
     }
   });
 })
+
+
 }
 
 
@@ -47,7 +50,7 @@ holes.forEach((hole) => {
 function startGame() {
   score.textContent = 0;
   scoreTotal = 0;
-  randomTimer(500, 600);
+  randomTimer(800, 1000);
   moveMole();
   addEventListener()
   setTimeout(() => {
@@ -59,4 +62,4 @@ function startGame() {
   }, 15000);
 }
 
-// problem: what to do when the random number generated is equal?
+
